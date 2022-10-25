@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FirebaseEKG</string>
+    <string name="register">Register</string>
+    <string name="log_in">Log in</string>
+    <string name="log_out">Log out</string>
+    <string name="welcome_msg">Welcome to my Firebase Application!
+        \nIf you are new here, click Register to register for an account. If not, go ahead and log in!</string>
 </resources>
