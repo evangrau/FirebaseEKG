@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     ConstraintLayout noUserPanel;
     RelativeLayout chatLayout;
+
+//    int mSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
                     // Clear the input
                     input.setText("");
+//                    mSize++;
                 }
+//                scrollToBottom(mSize);
             }
         });
 
@@ -167,4 +172,9 @@ public class MainActivity extends AppCompatActivity {
 
         listOfMessages.setAdapter(adapter);
     }
+
+//    private void scrollToBottom(int size) {
+//        ListView listOfMessages = (ListView) findViewById(R.id.list_of_messages);
+//        listOfMessages.setSelection(size);
+//    }
 }
