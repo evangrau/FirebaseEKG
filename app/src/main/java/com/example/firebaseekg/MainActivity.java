@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseListAdapter<ChatMessage> adapter;
 
     FirebaseUser currentUser;
+    String userDisplayName;
 
     ConstraintLayout noUserPanel;
     RelativeLayout chatLayout;
@@ -38,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        // Check if user is signed in (non-null) and update UI accordingly.
+        currentUser = mAuth.getCurrentUser();
 
         noUserPanel = (ConstraintLayout) findViewById(R.id.noUserPanel);
         chatLayout = (RelativeLayout) findViewById(R.id.chatMessage);
@@ -49,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText input = (EditText) findViewById(R.id.input);
+                String inputText = input.getText().toString();
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                if (input.getText().toString().isEmpty()) {
+                if (inputText.isEmpty()) {
                     Toast.makeText(
                             getApplicationContext(),
                             "Message cannot be empty!",
@@ -62,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance()
                             .getReference()
                             .push()
-                            .setValue(new ChatMessage(input.getText().toString(),
-                                    FirebaseAuth.getInstance()
-                                            .getCurrentUser()
-                                            .getDisplayName())
+                            .setValue(new ChatMessage(inputText, userDisplayName)
                             );
 
                     // Clear the input
@@ -108,17 +112,13 @@ public class MainActivity extends AppCompatActivity {
         noUserPanel.setVisibility(View.GONE);
         chatLayout.setVisibility(View.GONE);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        // Check if user is signed in (non-null) and update UI accordingly.
-        currentUser = mAuth.getCurrentUser();
-
         if (currentUser == null)
         {
             noUserPanel.setVisibility(View.VISIBLE);
         }
         else
         {
+            userDisplayName = currentUser.getEmail();
             chatLayout.setVisibility(View.VISIBLE);
             displayChatMessages();
         }
