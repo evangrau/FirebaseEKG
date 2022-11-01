@@ -59,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                if (inputText.isEmpty()) {
+                if (inputText.isEmpty() || !(Character.isDigit(inputText.charAt(0)) || Character.isLetter(inputText.charAt(0)))) {
                     Toast.makeText(
                             getApplicationContext(),
                             "Message cannot be empty!",
-                            Toast.LENGTH_SHORT);
+                            Toast.LENGTH_SHORT)
+                            .show();
                 }
                 else {
                     FirebaseDatabase.getInstance()

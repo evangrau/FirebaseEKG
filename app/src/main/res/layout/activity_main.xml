@@ -81,6 +81,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:clickable="true"
+            android:src="@drawable/send_arrow"
             android:tint="@android:color/white"
             app:fabSize="mini"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -96,7 +97,7 @@
                 android:id="@+id/input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input"
+                android:hint="Say something..."
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
